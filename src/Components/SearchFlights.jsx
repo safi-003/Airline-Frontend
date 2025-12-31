@@ -307,6 +307,12 @@ export function Search() {
             className="px-4 py-3 hover:bg-gray-100 cursor-pointer transition"
             onClick={() => {
               setFrom(obj.airportName.replace(/"/g, ''));
+              setUserInput(prev => {
+                let updated = {...prev};
+                updated.from = obj.airportName.replace(/"/g, '')
+
+                return updated;
+              })
               setQuery("");
               setSuggestionList([]);
             }}
@@ -364,6 +370,12 @@ export function Search() {
             className="px-4 py-3 hover:bg-gray-100 cursor-pointer transition"
             onClick={() => {
               setTo(obj.airportName.replace(/"/g, ''));
+              setUserInput(prev => {
+                let updated = {...prev};
+                updated.from = obj.airportName.replace(/"/g, '')
+
+                return updated;
+              })
               setQuery("");
               setSuggestionList([]);
             }}
