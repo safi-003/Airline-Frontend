@@ -159,6 +159,7 @@ export function Search() {
 
     if(!userInput.from || !userInput.to){
       
+      console.log(userInput)
       setIsErr(true);
       setNotification("Airport names can't be empty");
       return; 
@@ -372,7 +373,7 @@ export function Search() {
               setTo(obj.airportName.replace(/"/g, ''));
               setUserInput(prev => {
                 let updated = {...prev};
-                updated.from = obj.airportName.replace(/"/g, '')
+                updated.to = obj.airportName.replace(/"/g, '')
 
                 return updated;
               })
