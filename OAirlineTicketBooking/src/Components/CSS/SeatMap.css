@@ -1,0 +1,53 @@
+/* Wrapper */
+.plane {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+}
+
+/* Front (Cockpit) */
+.plane-front {
+  width: 260px;
+  height: 130px;
+  background: #dce1e5;
+  border-top-left-radius: 140px;
+  border-top-right-radius: 140px;
+  border: 10px solid #b2bcc4;
+  border-bottom: none;
+  position: relative;
+}
+
+/* Main fuselage */
+.plane-body {
+  width: 300px;                  /* Wide-body interior */
+  min-height: 900px;             /* Length of aircraft */
+  background: #eef0f1;           /* Light grey interior */
+  border-left: 10px solid #b2bcc4;
+  border-right: 10px solid #b2bcc4;
+  box-shadow: inset 0 0 50px rgba(0,0,0,0.15);
+  position: relative;
+  padding: 40px 30px;
+}
+
+/* Back (Tail taper) */
+.plane-tail {
+  width: 220px;
+  height: 90px;
+  background: #dce1e5;
+  border-bottom-left-radius: 120px;
+  border-bottom-right-radius: 120px;
+  border: 10px solid #b2bcc4;
+  border-top: none;
+}
+
+/* Wings */
+.plane-wings {
+  width: 600px;
+  height: 80px;
+  background: #c8d0d6;
+  border-radius: 40px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
