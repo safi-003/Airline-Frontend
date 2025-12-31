@@ -1,5 +1,5 @@
 import React from "react"
-import { Router, Routes, Route } from "react-router-dom"
+import { Router, Routes, Route, Navigate } from "react-router-dom"
 import { Search } from "./Components/SearchFlights"
 import { AvailFlights } from "./Components/AvailFlights"
 import { AdminProvider } from "./Components/Contexts/AdminProvider"
@@ -31,6 +31,8 @@ function App() {
 
       
       <Route element={<UserProfile />}>
+
+        <Route path="/" element={<Navigate to="user/search" replace />}/>
         <Route path="/user/SignUp" element={<Signup />}/>
         <Route path="/user/Login" element={<Login />}/>
         <Route path="/user/ForgotPassword" element={<ForgotPassoword />}/>
