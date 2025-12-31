@@ -310,7 +310,7 @@ export function Search() {
               setFrom(obj.airportName.replace(/"/g, ''));
               setUserInput(prev => {
                 let updated = {...prev};
-                updated.from = obj.airportName.replace(/"/g, '')
+                updated.from = obj.city.replace(/"/g, '')
 
                 return updated;
               })
@@ -373,7 +373,7 @@ export function Search() {
               setTo(obj.airportName.replace(/"/g, ''));
               setUserInput(prev => {
                 let updated = {...prev};
-                updated.to = obj.airportName.replace(/"/g, '')
+                updated.to = obj.city.replace(/"/g, '')
 
                 return updated;
               })
