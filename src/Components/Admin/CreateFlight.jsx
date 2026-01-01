@@ -18,6 +18,7 @@ export function CreateFlights(){
     let [showModal, setShowModal] = useState(false);
     let [display, setDisplay] = useState();
     let {ApiRequest} = useApiRequest();
+    let gateway = import.meta.env.VITE_GATEWAY_URL;
 
     let confirmInfo = () => {
   
@@ -30,7 +31,7 @@ export function CreateFlights(){
       
       console.log(flight)
       
-      await ApiRequest("post", "http://localhost:8082/flights/create",{
+      await ApiRequest("post", `${gateway}/flights/create`,{
             
               flightModel: flight,
               flightClassList: flightClass,

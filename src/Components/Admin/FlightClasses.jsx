@@ -12,6 +12,7 @@ export const FlightClasses = forwardRef((prop, ref) => {
 
     let {setNotification, setIsErr } = useContext(UserProviderContext)
     let {ApiRequest} = useApiRequest();
+    let gateway = import.meta.env.VITE_GATEWAY_URL;
 
     let [selectedClasses, setSelectedClasses] = useState(["economy", "business", "first"]);
     
@@ -53,7 +54,7 @@ export const FlightClasses = forwardRef((prop, ref) => {
         for(let v of selectedClasses){
            
           console.log(v);
-           let tier = await ApiRequest("post", `http://localhost:8082/flights/getTiers?className=${v.toUpperCase()}`)
+           let tier = await ApiRequest("post", `${gateway}/flights/getTiers?className=${v.toUpperCase()}`)
            setFlightTierTemplate(prev => [...prev, {[v]: tier}])
         }
 

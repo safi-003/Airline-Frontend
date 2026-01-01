@@ -11,6 +11,7 @@ let {flight, setFlight, flightClass, setFlightClass} = useContext(AdminProviderC
 
     let {setNotification, setIsErr} = useContext(UserProviderContext)
     let {ApiRequest} = useApiRequest();
+    let gateway = import.meta.env.VITE_GATEWAY_URL;
 
     let handleChange = (e) => {
 
@@ -29,7 +30,7 @@ let {flight, setFlight, flightClass, setFlightClass} = useContext(AdminProviderC
       
         if(name == "aircraftModel"){
         (async () => {
-        let res = await ApiRequest("post", `http://localhost:8082/flights/getFlightCapacity/${value}`)
+        let res = await ApiRequest("post", `${gateway}/flights/getFlightCapacity/${value}`)
      
         setFlight(prev => ({
         ...prev,
@@ -83,15 +84,15 @@ let {flight, setFlight, flightClass, setFlightClass} = useContext(AdminProviderC
             let isValid = true;
 
             const econ = await ApiRequest("post",
-            `http://localhost:8082/flights/getFlightClassLayout?aircraft=${flight.aircraftModel}&className=economy`
+            `${gateway}/flights/getFlightClassLayout?aircraft=${flight.aircraftModel}&className=economy`
           );
 
           const first = await ApiRequest("post",
-            `http://localhost:8082/flights/getFlightClassLayout?aircraft=${flight.aircraftModel}&className=first`
+            `${gateway}/flights/getFlightClassLayout?aircraft=${flight.aircraftModel}&className=first`
           );
 
           const business = await ApiRequest("post",
-            `http://localhost:8082/flights/getFlightClassLayout?aircraft=${flight.aircraftModel}&className=business`
+            `${gateway}/flights/getFlightClassLayout?aircraft=${flight.aircraftModel}&className=business`
           );
 
           const classes = [

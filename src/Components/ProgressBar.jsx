@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import  {FaPlane, FaUser, FaChair, FaShoppingBag, FaTh, FaCreditCard } from "react-icons/fa";
 import { UserProviderContext } from "./Contexts/UserProvider";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-
+import { LuBaggageClaim } from "react-icons/lu";
 
 export function ProgressBar(){
 
@@ -36,7 +36,8 @@ export function ProgressBar(){
         {  id: 1, key: "flight", url: "searchResults", label: "Flight", icon: <FaPlane /> },
         {  id: 2, key: "guests", url: "PassengerDetails", label: "Guests", icon: <FaUser /> },
         {  id: 3, key: "seats", url: "SeatMap",  label: "Seats", icon: <FaChair /> },
-        {  id: 4, key: "payment", url: "",  label: "Payment", icon: <FaCreditCard />},
+        {  id: 4, key: "baggage", url: "Bags",  label: "Baggage", icon: <LuBaggageClaim /> },
+        {  id: 5, key: "payment", url: "",  label: "Payment", icon: <FaCreditCard />},
       ].map((step, index, arr) => (
         <div key={step.key} className="flex items-center">
 
@@ -64,7 +65,7 @@ export function ProgressBar(){
 
               {/* Small green circle around icon for ACTIVE step */}
               {currentlyIn === step.key && (
-                <div className="absolute inset-0 rounded-full border-2 border-[#0d5b4c]"></div>
+                <div className="absolute inset-2 rounded-full border-2 border-[#0d5b4c]"></div>
               )}
 
               {/* Small green tick badge (optional for completed steps) */}

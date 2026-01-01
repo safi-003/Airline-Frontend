@@ -3,6 +3,7 @@ import { PassengersSeats } from "./PassengersSeats";
 import { SeatMap } from "./SeatMap";
 import { UserInputContext } from "../Contexts/UserInputProvider";
 import { useNavigate } from "react-router-dom";
+import { UserProviderContext } from "../Contexts/UserProvider";
 
 export function SeatLayout(){
     
@@ -13,6 +14,7 @@ export function SeatLayout(){
     let [PassengerInitials, setPassengerInitials] = useState([])
 
     let {setUserInput} = useContext(UserInputContext);
+    let {setCurrentlyIn} = useContext(UserProviderContext);
     let nav = useNavigate();
 
     let confirm = () => {
@@ -42,6 +44,7 @@ export function SeatLayout(){
         })
 
         nav("/user/Bags")
+        setCurrentlyIn("baggage");
     }
 
     return(
