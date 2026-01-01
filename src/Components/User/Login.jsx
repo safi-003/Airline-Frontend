@@ -17,6 +17,7 @@ export function Login() {
   const [password, setPassword] = useState("");
   const [viewPassword, setViewPassword] = useState(false);
   const {ApiRequest} = useApiRequest();
+  let gateway = import.meta.env.VITE_GATEWAY_URL;
   let nav = useNavigate();
   let {userInput, setUserInput, userProfile, setUserProfile} = useContext(UserInputContext)
   let {setNotification, setIsErr, setLoading} = useContext(UserProviderContext)
@@ -26,7 +27,7 @@ export function Login() {
     try{
 
     setLoading(true)
-    let res = await ApiRequest("post-with-creds", "http://localhost:8085/Auth/authenticate", {}, false, true)
+    let res = await ApiRequest("post-with-creds", `${gateway}/Auth/authenticate`, {}, false, true)
     console.log(res)
 
     if(res.status == HttpStatusCode.Ok){
@@ -76,7 +77,7 @@ export function Login() {
     e.preventDefault();
     console.log({ email, password });
 
-    let res = await ApiRequest("post-with-creds", "http://localhost:8085/Auth/verifyCreds", 
+    let res = await ApiRequest("post-with-creds", `${gateway}/Auth/verifyCreds`, 
       {emailId: email, password: password}, false, true) 
     
     console.log(res)

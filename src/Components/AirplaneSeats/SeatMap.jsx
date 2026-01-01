@@ -18,6 +18,7 @@ export function SeatMap({ selectSeat, SeatIds, PassengerInitials }){
 
     const CABIN_MAX_WIDTH = "max-w-[520px]"; 
     let {ApiRequest} = useApiRequest();
+    let gateway = import.meta.env.VITE_GATEWAY_URL;
     let {userInput} = useContext(UserInputContext);
     let {fleetTemplate} = useContext(AdminProviderContext)
     let {AvailSeatsInFlight} = useContext(UserProviderContext)
@@ -64,7 +65,7 @@ export function SeatMap({ selectSeat, SeatIds, PassengerInitials }){
     useEffect(() => {
 
       (async() => {
-        let data = await ApiRequest("get", "http://localhost:8082/flights/getSeatPriceModifiers")
+        let data = await ApiRequest("get", `${gateway}/flights/getSeatPriceModifiers`)
         console.log(data)
         setPriceMods({SeatTypeModifier: data.SeatTypeModifier,
                       ZoneModifier: data.ZoneModifier

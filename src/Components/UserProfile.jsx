@@ -12,12 +12,15 @@ export function UserProfile(){
     let {setLoading} = useContext(UserProviderContext)
     let loggedIn = userInput.loggedIn
     let {ApiRequest} = useApiRequest();
+    let gateway = import.meta.env.VITE_GATEWAY_URL;
     let [confirmLogout, setConfirmLogout] = useState(false)
     // let nav = useNavigate();
 
     let profile = () => {
         window.open("/user/SignUp", "_blank");
     }
+
+    console.log(gateway)
 
     useEffect(() => {
       console.log(userProfile)
@@ -34,7 +37,7 @@ export function UserProfile(){
     let handleLogout = async () => {
 
       // Sending LOGOUT Request
-      let res = await ApiRequest("post-with-creds", "http://localhost:8083/Users/logout",{}, false, true);
+      let res = await ApiRequest("post-with-creds", `${gateway}/Users/logout`,{}, false, true);
      
       // If request is successfull
       if(res && res.status == HttpStatusCode.Ok){
@@ -70,7 +73,7 @@ export function UserProfile(){
         (async () => {
     
         
-        let res = await ApiRequest("post-with-creds", "http://localhost:8085/Auth/authenticate", {}, false, true)
+        let res = await ApiRequest("post-with-creds", `${gateway}/Auth/authenticate`, {}, false, true)
         console.log(res)
     
          if(res && res.status == HttpStatusCode.Ok){

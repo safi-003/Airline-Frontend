@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 export function Signup() {
 
     let {ApiRequest} = useApiRequest();
+    let gateway = import.meta.env.VITE_GATEWAY_URL;
     const [viewPassword, setViewPassword] = useState(false);
     let navigate = useNavigate();
 
@@ -32,7 +33,7 @@ export function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Signup Data:", formData);
-    await ApiRequest("post", "http://localhost:8083/Users/SaveLocalUser", formData);
+    await ApiRequest("post", `${gateway}/Users/SaveLocalUser`, formData);
     // call signup API here
   };
 

@@ -11,6 +11,7 @@ import { UserProviderContext } from "./Contexts/UserProvider";
 export function Bags(){
 
     let {ApiRequest} = useApiRequest();
+    let gateway = import.meta.env.VITE_GATEWAY_URL;
     let [baggageTemplate, setBaggageTemplate] = useState()
     let [perSlab, setPerSlab] = useState(0);   
     let [pricePerSlab, setPricePerSlab] = useState(0);
@@ -25,7 +26,7 @@ export function Bags(){
 
         (async () => {
 
-            let res = await ApiRequest("get", "http://localhost:8082/flights/getBaggageDetails");
+            let res = await ApiRequest("get", `${gateway}/flights/getBaggageDetails`);
 
             setPricePerSlab(res.extraBaggage.pricePerSlab)
             setPerSlab(res.extraBaggage.perSlab)

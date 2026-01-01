@@ -10,6 +10,7 @@ import { UserInputContext } from "./Contexts/UserInputProvider";
 
 export function Search() {
 
+  let gateway = import.meta.env.VITE_GATEWAY_URL;
   let {ApiRequest} = useApiRequest();
   let {search} = useSearchInDB()
   let [from, setFrom] = useState("")
@@ -20,6 +21,8 @@ export function Search() {
   let [isToFocused, setIsToFocused] = useState(false);
   let [suggestionList, setSuggestionList] = useState([]);
 
+  console.log(gateway)
+  
   let {
             Modal, setModal,
             setCurrentlyIn,
@@ -128,10 +131,12 @@ export function Search() {
       
       console.log(value)
 
-      let res = await ApiRequest("post", `http://localhost:8082/flights/SearchAirports?query=${value.toLowerCase()}`)
+      // let res = await ApiRequest("post", `http://localhost:8082/flights/SearchAirports?query=${value.toLowerCase()}`)
 
+      let res = await ApiRequest("post", `${gateway}/flights/SearchAirports?query=${value.toLowerCase()}`)
       console.log(res)
-      setSuggestionList(res);
+
+      if(Array.isArray(res)) setSuggestionList(res);
 
     }, 500)
 
@@ -170,9 +175,15 @@ export function Search() {
 
 
     // Getting available dates 
-    let data = await ApiRequest("post", `http://localhost:8082/flights/getDates?from=${userInput.from}&to=${userInput.to}`)
 
-    if(data.length > 0) setFlightDates(data);
+      console.log("Going to make request to search for flights")
+
+      let data = await ApiRequest("post", `https://unpublishable-rebecka-nonsatirizing.ngrok-free.dev/flights/getDates?from=${userInput.from}&to=${userInput.to}`)
+    // let data = await ApiRequest("post", `http://localhost:8082/flights/getDates?from=${userInput.from}&to=${userInput.to}`)
+
+    console.log(data)
+    
+    if(data && data.length > 0) setFlightDates(data);
     else setFlightDates([])
 
     // setUserInput(prev => {

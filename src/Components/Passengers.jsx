@@ -15,9 +15,12 @@ export function Passengers(){
     let [infantGenders, setInfantGenders] = useState([])
     let {setNotification, setIsErr, setCurrentlyIn} = useContext(UserProviderContext);
     let {ApiRequest} = useApiRequest();
+    let gateway = import.meta.env.VITE_GATEWAY_URL;
     let {setFleetTemplate} = useContext(AdminProviderContext)
 
     let genderRefs  = {adults: [], childs: [], infants: []}
+
+    console.log(gateway)
 
     let generateId = () => {
 
@@ -301,7 +304,9 @@ export function Passengers(){
         }
       } 
 
-      let fleetData = await ApiRequest("get", "http://localhost:8082/flights/getFleetTemplate")
+      let fleetData = await ApiRequest("get", `${gateway}/flights/getFleetTemplate`)
+
+      console.log(fleetData)
       
       // else {
       //   highlightEmail(true, "Please enter a valid mail ID else")

@@ -15,6 +15,7 @@ export function NewPassword({email}){
   const [errDesc, setErrDesc] = useState("")
   const [viewPassword, setViewPassword] = useState(false)
   const {ApiRequest} = useApiRequest();
+  let gateway = import.meta.env.VITE_GATEWAY_URL;
  
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,7 +36,7 @@ export function NewPassword({email}){
 
         setHasError(false)
 
-        await ApiRequest("post", "http://localhost:8084/Users/ForgotPassword", 
+        await ApiRequest("post", `${gateway}/Users/ForgotPassword`, 
         {emailId: email, 
         password: newPassword,
         confirmPassword: confirmPassword

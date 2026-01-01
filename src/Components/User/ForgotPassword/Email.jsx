@@ -8,12 +8,13 @@ export function Email({email, setEmail, goToOtp}) {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const {ApiRequest} = useApiRequest();
+  let gateway = import.meta.env.VITE_GATEWAY_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    let res = await ApiRequest("post", `http://localhost:8084/Users/GenerateOTP/${encodeURIComponent(email.toLowerCase())}`)
+    let res = await ApiRequest("post", `${gateway}Users/GenerateOTP/${encodeURIComponent(email.toLowerCase())}`)
     
     setMessage("An OTP has been sent to your email.");
     setLoading(false);

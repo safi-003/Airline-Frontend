@@ -13,12 +13,13 @@ import { pricing } from "./pricing";
 export function AvailFlights() {
 
     let {ApiRequest} = useApiRequest();
+    let gateway = import.meta.env.VITE_GATEWAY_URL;
     let {availflights, setCurrentlyIn, setAvailSeatsInFlight} = useContext(UserProviderContext);
     // let {flightTierTemplate} = useContext(AdminProviderContext)
     let {userInput, setUserInput} = useContext(UserInputContext);
     let [tierTemplate, setTierTemplate] = useState({});
 
-   
+    console.log(gateway)
     let TimeDiff = (arrival, dep) => {
 
 
@@ -47,7 +48,7 @@ export function AvailFlights() {
         
         for(let cls of classes){
           
-          let data = await ApiRequest("post", `http://localhost:8082/flights/getTiers?className=${cls}`)
+          let data = await ApiRequest("post", `${gateway}/flights/getTiers?className=${cls}`)
 
           console.log(data)
 
@@ -123,7 +124,7 @@ export function AvailFlights() {
     console.log(tierPrice)
     console.log(tierPrice.replace(/[^\d.-]/g, ""))
 
-    let seats = await ApiRequest("post", `http://localhost:8082/flights/getAvailSeats?flightId=${flightListing.id}&className=${className}&status=AVAILABLE`)
+    let seats = await ApiRequest("post", `${gateway}/flights/getAvailSeats?flightId=${flightListing.id}&className=${className}&status=AVAILABLE`)
 
     let classPrice = Number(pricing(flightListing, className).replace(/[^\d.-]/g, ""))
 

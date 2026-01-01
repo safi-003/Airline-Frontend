@@ -13,7 +13,9 @@ let ApiRequest = async (method, endpoint, body={}, rethrow = false, returnObj = 
         
         setLoading(true)
         let response;
-
+        
+        axios.defaults.headers.common["ngrok-skip-browser-warning"] = "true";
+        
         switch(method.toLowerCase()){
             
             case "post-with-creds":

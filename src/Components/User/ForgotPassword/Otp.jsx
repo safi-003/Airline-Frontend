@@ -8,10 +8,11 @@ export function Otp({ email, goToNewPassword}){
 
     const [otp, setOtp] = useState("")
     const {ApiRequest} = useApiRequest();
+    let gateway = import.meta.env.VITE_GATEWAY_URL;
 
     const handleValidateOtp = async () => {
 
-    let res = await ApiRequest("Post", `http://localhost:8084/Users/VerifyOTP?email=${email.toLowerCase()}&otp=${otp}`)
+    let res = await ApiRequest("Post", `${gateway}/Users/VerifyOTP?email=${email.toLowerCase()}&otp=${otp}`)
     
     if(res && res.status == 200){
       

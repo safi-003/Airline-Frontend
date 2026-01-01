@@ -7,6 +7,7 @@ import { LoadingAnimation } from "./LoadAnimation";
 export function Checkout(){
 
     let {ApiRequest} = useApiRequest();
+    let gateway = import.meta.env.VITE_GATEWAY_URL;
     
     useEffect(() => {
 
@@ -18,7 +19,7 @@ export function Checkout(){
 
                 console.log("order created")
 
-                let res = await ApiRequest("post", "http://localhost:8082/flights/verifyFareDetails?amount=1000");
+                let res = await ApiRequest("post", `${gateway}/flights/verifyFareDetails?amount=1000`);
 
                 console.log(res)    
                 openCheckout(res)
@@ -26,6 +27,8 @@ export function Checkout(){
             
        
         })();
+
+        console.log(gateway)
         
     }, [])
 
