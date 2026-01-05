@@ -20,8 +20,6 @@ export function Search() {
   let [isFromFocused, setIsFromFocused] = useState(false)
   let [isToFocused, setIsToFocused] = useState(false);
   let [suggestionList, setSuggestionList] = useState([]);
-
-  console.log(gateway)
   
   let {
             Modal, setModal,
@@ -182,7 +180,7 @@ export function Search() {
     // let data = await ApiRequest("post", `http://localhost:8082/flights/getDates?from=${userInput.from}&to=${userInput.to}`)
 
     console.log(data)
-    
+
     if(data && data.length > 0) setFlightDates(data);
     else setFlightDates([])
 

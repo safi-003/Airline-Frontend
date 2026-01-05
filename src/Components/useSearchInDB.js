@@ -7,8 +7,6 @@ export function useSearchInDB(){
   let {ApiRequest} = useApiRequest();
   let gateway = import.meta.env.VITE_GATEWAY_URL;
 
-  console.log(gateway)
-
   let search = async ({from, to, date, totalCount, setAvailflights, availflights}) => {
 
   let res = await ApiRequest("post", `${gateway}/flights/searchFlight`, {

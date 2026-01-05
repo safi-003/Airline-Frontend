@@ -20,8 +20,6 @@ export function UserProfile(){
         window.open("/user/SignUp", "_blank");
     }
 
-    console.log(gateway)
-
     useEffect(() => {
       console.log(userProfile)
     }, [userProfile])
@@ -48,7 +46,7 @@ export function UserProfile(){
         setUserInput(prev => {
           let updated = {...prev};
 
-          updated.loggedIn = false;
+          updated.loggedIn = true;
 
           return updated;
         })
@@ -79,6 +77,7 @@ export function UserProfile(){
          if(res && res.status == HttpStatusCode.Ok){
           setUserProfile({
           
+            id: res.data.Id,
             email: res.data.Email,
             fullName: res.data.FullName
         

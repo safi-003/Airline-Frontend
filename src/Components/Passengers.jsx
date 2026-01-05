@@ -20,8 +20,6 @@ export function Passengers(){
 
     let genderRefs  = {adults: [], childs: [], infants: []}
 
-    console.log(gateway)
-
     let generateId = () => {
 
         return Math.random().toString().slice(6,10)

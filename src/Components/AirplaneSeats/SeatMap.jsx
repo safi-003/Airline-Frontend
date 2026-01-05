@@ -135,12 +135,12 @@ export function SeatMap({ selectSeat, SeatIds, PassengerInitials }){
 
     let setPrice = (className, tierName, seatNum, isBassinet, isExit, isXL) =>  {
 
+      console.log("Set price called")
+
       // For all non economy classes, seats are free
       if(className != "economy") return 0;
 
-      // console.log(FORWARD_ZONE)
-      // console.log(MIDDLE_ZONE)
-      // console.log(REAR_ZONE)
+      // Here only seats which are of ECONOMY class and is of BASIC or VALUE Tier comes
 
         let zonesArr = [{ limit: FORWARD_ZONE, name: "FORWARD_ZONE" },
                         { limit: MIDDLE_ZONE,  name: "MIDDLE_ZONE"  },
@@ -148,6 +148,8 @@ export function SeatMap({ selectSeat, SeatIds, PassengerInitials }){
 
         let zone_name = zonesArr.find(z => seatNum <= z.limit)
         zone = zone_name.name
+
+        console.log(zone)
 
         if(priceMods.ZoneModifier && priceMods.SeatTypeModifier){
           
@@ -158,6 +160,9 @@ export function SeatMap({ selectSeat, SeatIds, PassengerInitials }){
         // console.log(seatTypePrice)
 
         // let baseFee = priceMods.SeatTypeModifier.STANDARD;
+
+        console.log(seatTypePrice)
+        console.log(zonePrice)
 
         return seatTypePrice + zonePrice;
         
@@ -330,8 +335,17 @@ return (
                 const isNonReclining = className == "economy" && (isBassinet || isExit || classObj.exitRows.includes(currCol+1) || currCol == cols)
                 const isAisle = groupIndex != 0 && seatIndex == 0 || groupSize == seatIndex + 1
                 const seatType = isWindow ? "Window Seat" : isAisle ? "Aisle Seat" : "Standard";
-                const seatPrice = (className === "economy" && (userInput.TierName == "BASIC" && userInput.TierName == "VALUE")) ? (freeSeats.includes(seatId) && 0) : setPrice(userInput.ClassName, userInput.TierName, currCol, isBassinet, isExit, isXL);
+                // const seatPrice = (className === "economy" && (userInput.TierName == "BASIC" || userInput.TierName == "VALUE")) ? (freeSeats.includes(seatId) && 0) : setPrice(userInput.ClassName, userInput.TierName, currCol, isBassinet, isExit, isXL);
                 
+                // If the seat is in ECONOMY and belongs to BASIC or VALUE Tier
+                // check if the seat is in free seats arr and if yes then it should be 0
+                const seatPrice = (className === "economy" && (userInput.TierName == "BASIC" || userInput.TierName == "VALUE") 
+                                      ? freeSeats.includes(seatId)
+                                        ? 0
+                                        : setPrice(userInput.ClassName, userInput.TierName, currCol, isBassinet, isExit, isXL)
+                                      : 0);    
+
+
                 const seatColor = className === "economy" && (userInput.TierName == "BASIC" || userInput.TierName == "VALUE") ? (zone == "FORWARD_ZONE" ? "bg-purple-500" : (freeSeats && freeSeats.includes(seatId) ? "bg-green-400" :  "bg-orange-400")) : (seatPrice == 0 ? "bg-green-400" : "bg-orange-400")
                 // const seatColor = (className === "economy" ? (userInput.TierName == "BASIC" || userInput.TierName == "VALUE" ? freeSeats.includes(seatId) && "bg-green-400" : (zone == "FORWARD_ZONE" ? "bg-purple-500" : "bg-orange-400")) : (seatPrice == 0 ? "bg-green-400" : "bg-orange-400")) 
                 const labels = [];

@@ -1,3 +1,5 @@
+import { Checkout } from "./Checkout";
+
    export const createOrder = () => {
 
         return new Promise((resolve) => {
@@ -15,15 +17,28 @@
 //    let options = {
         
 //         "orderId": "order_xxx",
-//         "amount": 10000,
+//         "amount": 10000,  
 //         "currency": "INR",
 //         "key": "rzp_test_RsuNG5yyyY0EVG",
   
 //     }
    
-    export const openCheckout = (options) => {
+    export const openCheckout = (options, onExit) => {
 
-        let razorpay = new window.Razorpay(options).open()
+        console.log(options.order_id)
+
+        let razorPayOptions = {
+        
+        ...options,
+        handler: () => onExit(options.order_id),
+        modal:{
+            ondismiss: () => onExit()
+        }
+    
+        }
+
+        let razorpay = new window.Razorpay(razorPayOptions);
+        razorpay.open();
     }
 
     

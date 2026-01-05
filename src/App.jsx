@@ -19,6 +19,8 @@ import { Signup } from "./Components/User/Signup"
 import { Login } from "./Components/User/Login"
 import { ForgotPassoword } from "./Components/User/ForgotPassword/ForgotPassword"
 import { UserProfile } from "./Components/UserProfile"
+import { PaymentProcessing } from "./Components/PaymentProcessing"
+import BookingSuccess from "./Components/Pnr"
 
 function App() {
 
@@ -29,6 +31,7 @@ function App() {
   //   <AdminProvider>  
       <Routes>
 
+      <Route path="/user/BookingSuccess" element={<BookingSuccess />} />
       
       <Route element={<UserProfile />}>
 
@@ -38,7 +41,7 @@ function App() {
         <Route path="/user/ForgotPassword" element={<ForgotPassoword />}/>
         
         
-
+        <Route path="/user/PaymentProcessing" element={<PaymentProcessing />} />
         <Route path="/user/search" element={<Search />}/> 
         <Route path="/admin/createFlights/" element={<CreateFlights />}/>
         

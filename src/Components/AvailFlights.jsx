@@ -19,7 +19,6 @@ export function AvailFlights() {
     let {userInput, setUserInput} = useContext(UserInputContext);
     let [tierTemplate, setTierTemplate] = useState({});
 
-    console.log(gateway)
     let TimeDiff = (arrival, dep) => {
 
 
@@ -104,7 +103,9 @@ export function AvailFlights() {
 
     // Price formatting
     const formatPrice = (n) => {
-     
+      
+      // This option controls decimal places
+
       return n.toLocaleString("en-IN", { maximumFractionDigits: 0 });
     };
 
